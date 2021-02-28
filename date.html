@@ -3,50 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
     <title>달력</title>
 </head>
 
-<style>
-
-/* 달력 */
-
-.rap {
-  max-width: 800px;
-  width: 100%;
-  margin: 0 auto;
-}
-
-.date_head {
-  margin-bottom: 10px;
-}
-
-.date_head div {
-  background: #f03d3d;
-  color: #fff;
-}
-
-.date_form {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-gap: 10px;
-  text-align: center;
-}
-
-.date_form div {
-  padding: 10px 10px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.dateSel div {
-  font-weight: bold;
-  color: #333;
-}
-
-.background {
-  background: #f1f1f1;
-}
-</style>
 
 <body>
 
@@ -70,37 +31,3 @@
 
 </body>
 </html>
-
-<script>
-  
-  function getDate(date) {
-    return date.toISOString().split("T")[0].split("-").map(v => Number(v));
-  }
-  
-  const Tday = new Date();
-  
-  const nowMonth = Tday.getMonth();
-  
-  const [y, m] = getDate(new Date(Tday.setMonth(nowMonth)));
-  
-  const lastDay = getDate(new Date(y, m))[2];
-  
-  const day = new Date([y, m, 1].join("-")).getDay();
-  
-  const maxDay = day + lastDay;
-
-  let html = '';
-
-  for (let count = 1; count <= maxDay; count++) {
-
-    const bool = count > day && maxDay >= count;
-
-    html += `
-      <div class="dateSel ${bool ? 'background' : ''}">${bool ? count - day : ''}</div>
-    `;
-  }
-
-  document.querySelector(`.dateSel`).innerHTML = html;
-  
-</script>
-  
